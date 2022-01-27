@@ -2,4 +2,8 @@
 
 import { TicketBooth } from "./TicketBooth.js";
 
+const eventHub = document.querySelector("#state-fair")
+
+eventHub.addEventListener("ticketAdded", event => TicketBooth())
+
 TicketBooth()
