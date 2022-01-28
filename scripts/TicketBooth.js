@@ -1,40 +1,60 @@
-import { FoodTicketHolders } from "./food/FoodTicketHolders.js";
-import { FullPackageTicketHolders } from "./fullPackage/FullPackageTicketHolders.js";
-import { GamesTicketHolders } from "./games/GamesTicketHolders.js";
-import { RideTicketHolders } from "./rides/RideTicketHolders.js";
-import { SideshowTicketHolders } from "./sideshows/SideshowTicketHolders.js";
-import { addTicket, getTicketCount } from "./AddTickets.js";
+import "./food/FoodTicketHolders.js";
+import "./fullPackage/FullPackageTicketHolders.js";
+import "./games/GamesTicketHolders.js";
+import "./rides/RideTicketHolders.js";
+import "./sideshows/SideshowTicketHolders.js";
+import { getTicketCount } from "./AddTickets.js";
 
 const buttonTarget = document.querySelector(".entry")
-const countTarget = document.querySelector(".customers")
 const eventHub = document.querySelector("#state-fair")
-const rideEvent = new CustomEvent("rideTicketPurchased")
-const foodEvent = new CustomEvent("foodTicketPurchased")
-const sideshowEvent = new CustomEvent("sideshowTicketPurchased")
-const gamesEvent = new CustomEvent("gamesTicketPurchased")
-const fullPackageEvent = new CustomEvent("fullPackageTicketPurchased")
+
+const rideEvent = new CustomEvent("ticketPurchased", {
+    detail: {
+      name: 'ride'
+    }
+  })
+const foodEvent = new CustomEvent("ticketPurchased", {
+    detail: {
+      name: 'food'
+    }
+  })
+const sideshowEvent = new CustomEvent("ticketPurchased", {
+    detail: {
+      name: 'sideshow'
+    }
+  })
+const gamesEvent = new CustomEvent("ticketPurchased", {
+    detail: {
+      name: 'games'
+    }
+  })
+const fullPackageEvent = new CustomEvent("ticketPurchased", {
+    detail: {
+      name: 'fullPackage'
+    }
+  })
 
 eventHub.addEventListener("click", event => {
     if(event.target.id === "rideTicket") {
         eventHub.dispatchEvent(rideEvent)
-        addTicket()
+        //addTicket()
     } else if (event.target.id === "foodTicket") {
         eventHub.dispatchEvent(foodEvent)
-        addTicket()
+        //addTicket()
     } else if (event.target.id === "gamesTicket") {
         eventHub.dispatchEvent(gamesEvent)
-        addTicket()
+        //addTicket()
     } else if (event.target.id === "sideshowTicket") {
         eventHub.dispatchEvent(sideshowEvent)
-        addTicket()
+        //addTicket()
     } else if (event.target.id === "fullPackageTicket") {
         eventHub.dispatchEvent(fullPackageEvent)
-        addTicket()
+        //addTicket()
     }
 })
 
 export const TicketBooth = () => {
-    countTarget.innerHTML = `Total tickets purchased: ${getTicketCount()}`
+    //countTarget.innerHTML = '<div class="ticketCount">Total tickets purchased: 0</div>'
     buttonTarget.innerHTML = `
         <div class="ticketBooth">
             <button id="rideTicket">Ride Ticket</button>
@@ -47,8 +67,8 @@ export const TicketBooth = () => {
     `
 }
 
-RideTicketHolders()
-FoodTicketHolders()
-GamesTicketHolders()
-SideshowTicketHolders()
-FullPackageTicketHolders()
+// RideTicketHolders()
+// FoodTicketHolders()
+// GamesTicketHolders()
+// SideshowTicketHolders()
+// FullPackageTicketHolders()

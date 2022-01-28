@@ -7,10 +7,11 @@ const targetList = [ridesTarget, foodTarget, gamesTarget, sideshowTarget]
 
 const eventHub = document.querySelector("#state-fair")
 
-export const FullPackageTicketHolders = () => {
-    eventHub.addEventListener("fullPackageTicketPurchased", customEvent => {
+
+eventHub.addEventListener("ticketPurchased", event => {
+    if(event.detail.name === "fullPackage"){
         for (const target of targetList) {
             target.innerHTML += '<div class="person bigSpender"></div>'
         }
-    })
-}
+    }
+})
